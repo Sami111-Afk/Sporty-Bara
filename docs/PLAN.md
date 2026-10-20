@@ -9,10 +9,12 @@ Aplicație Android pentru urmărirea pariurilor sportive **fără bani reali**:
 - calculează o **cotă proprie** (date echipe + cote din piață + modele matematice + AI) și arată dacă o casă dă o cotă prea mică / prea mare;
 - joc cu **monedă virtuală** (Bara Coins): bilete, rezultate, clasament, ligi private, social;
 - **asistent AI** care explică pe înțeles de ce o cotă merită sau nu;
+- **Roata de premii**: rotiri gratuite (zilnic + bonus la bilete plasate), premii doar virtuale;
 - **Sporty-Bara Card**: card virtual în Google Wallet + plată prin NFC între telefoane, doar cu monedă virtuală.
 
 ## Reguli de bază
-- Monedele **nu se cumpără și nu se retrag** — se obțin doar din joc (bonus înregistrare, bonus zilnic, câștiguri). Fără valoare bănească.
+- Monedele **nu se cumpără și nu se retrag** — se obțin doar din joc (bonus înregistrare, bonus zilnic, pariuri câștigate, roata de premii). Fără valoare bănească.
+- Rotirile la roată **nu se cumpără**; rezultatul e tras pe server (RNG sigur).
 - Cheile API (cote, AI) stau **doar pe server**, niciodată în aplicație.
 - Toate operațiile cu monede sunt validate pe server (clientul nu modifică soldul direct).
 - Cardul NFC folosește un **AID propriu Sporty-Bara**, nu emulează Visa/Mastercard. La un POS bancar real nu e recunoscut → plata e respinsă.
@@ -65,6 +67,13 @@ Aplicație Android pentru urmărirea pariurilor sportive **fără bani reali**:
 - [ ] Ligi private (cod de invitație)
 - [ ] Follow jucători + vezi biletele lor
 - [ ] Bilete în grup
+
+### 5b. Roata de premii
+- [ ] 1 rotire gratuită / zi + 1 rotire bonus la fiecare 5 bilete plasate
+- [ ] Premii: monede, bilet gratuit, multiplicator câștig, întrebări extra la AI
+- [ ] `spin_wheel` pe server (RNG sigur, probabilități configurabile în Firestore)
+- [ ] Animație roată în app (rezultatul vine de la server)
+- [ ] Istoric rotiri
 
 ### 6. Asistent AI
 - [ ] Chat „de ce merită / nu merită cota asta” (prin Cloud Function)
