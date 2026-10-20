@@ -31,6 +31,7 @@ Aplicație Android pentru urmărirea pariurilor sportive **fără bani reali**:
 | Notificări | Firebase Cloud Messaging |
 | Wallet | Google Wallet API (Generic / Loyalty pass) |
 | NFC | Android HCE (Host Card Emulation) cu AID propriu + mod „terminal” în aplicație |
+| Criptare omomorfă | Paillier — `phe` (Python, server) + `javallier` (Java, app), compatibile |
 
 ## Etape
 
@@ -65,8 +66,19 @@ Aplicație Android pentru urmărirea pariurilor sportive **fără bani reali**:
 ### 5. Social
 - [ ] Clasament general
 - [ ] Ligi private (cod de invitație)
+- [ ] **Clasament omomorf în ligi private (Paillier)** — vezi mai jos
 - [ ] Follow jucători + vezi biletele lor
 - [ ] Bilete în grup
+
+#### Clasament omomorf (ligi private)
+Scop: statisticile de clasament ale unei ligi (profit, rata de câștig, număr bilete) sunt **stocate și agregate criptat** — serverul le calculează fără să le cunoască valorile.
+- [ ] La crearea ligii, aplicația creatorului generează perechea de chei Paillier a ligii
+- [ ] Cheia publică → Firestore (`leagues/{id}`); cheia privată → trimisă fiecărui membru criptată cu cheia lui (RSA din Android Keystore)
+- [ ] `settle_tickets`: rezultatul biletului se criptează cu cheia publică a ligii, plaintext-ul nu se salvează în statisticile ligii
+- [ ] Serverul adună omomorf: profit total, nr. bilete câștigate / totale per membru (doar ciphertext în `league_stats`)
+- [ ] App-ul membrilor decriptează (javallier) și **ordonează local** clasamentul
+- [ ] Limitare asumată: serverul cunoaște soldul și biletele (necesar pentru decontare); ce e protejat sunt statisticile agregate ale ligii. Ordonarea criptată pe server (FHE) — doar ca extindere viitoare.
+- [ ] Clasamentul general rămâne necriptat
 
 ### 5b. Roata de premii
 - [ ] 1 rotire gratuită / zi + 1 rotire bonus la fiecare 5 bilete plasate
@@ -82,6 +94,8 @@ Aplicație Android pentru urmărirea pariurilor sportive **fără bani reali**:
 ### 7. Sporty-Bara Card (Wallet + NFC)
 - [ ] Generare card virtual per utilizator (ID card, legat de cont)
 - [ ] Buton „Adaugă în Google Wallet” (pass cu nume, sold, QR) + actualizare sold de pe server
+- [ ] Ecran **„Plătește”** în aplicație: afișează **același card** ca în Wallet (design, ID, sold) și pornește tap-ul NFC
+- [ ] Notă: Google Wallet face NFC doar pentru carduri bancare reale → tap-ul pornește din aplicația Sporty-Bara; din Wallet se plătește prin QR
 - [ ] HCE: telefonul se comportă ca un card Sporty-Bara (AID propriu)
 - [ ] Mod „terminal” în aplicație: alt telefon citește cardul la tap și cere plata în monede
 - [ ] Validare + transfer pe server, tranzacție semnată, protecție la replay
