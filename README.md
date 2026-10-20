@@ -19,6 +19,10 @@ Din terminal:
 ./gradlew test            # teste unitare
 ```
 
+## Documente
+- [Plan proiect](docs/PLAN.md)
+- [Plan de design](docs/DESIGN.md)
+
 ## Workflow
 - `main` = stabil; lucrăm pe branch-uri (`feature/...`) și facem Pull Request.
 - Nu se comit `local.properties`, keystore-uri sau `google-services.json`.

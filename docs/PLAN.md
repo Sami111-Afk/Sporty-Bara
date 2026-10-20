@@ -35,51 +35,9 @@ Aplicație Android pentru urmărirea pariurilor sportive **fără bani reali**:
 | NFC | Android HCE (Host Card Emulation) cu AID propriu + mod „terminal” în aplicație |
 | Criptare omomorfă | Paillier — `phe` (Python, server) + `javallier` (Java, app), compatibile |
 
-## Design — tema capibara 🦫
-Toată aplicația e **capybara-themed** (Sporty-**Bara**). Capibara e calmă și „chill” — tonul aplicației: pariuri fără stres, fără bani reali.
-
-**Mascota: Bara** — capibara cu o portocală (yuzu) pe cap, apare peste tot:
-| Situație | Bara |
-|---|---|
-| Bilet câștigat | Bara sărbătorește, portocala sare |
-| Bilet pierdut | Bara stă în apă, „se mai întâmplă” |
-| Încărcare | Bara înoată (animație Lottie) |
-| Ecran gol (fără bilete) | Bara doarme pe iarbă |
-| Eroare / fără internet | Bara confuză |
-| Consultant AI | **Profesorul Bara** — capibara cu ochelari |
-
-**Paletă** (definită în `colors.xml`, light + dark):
-- maro capibara `#8B5E3C` (primar), crem `#F5E6D3` (fundal), portocaliu yuzu `#F39C12` (accent, butoane, monede), verde iarbă/apă `#4CAF50` (câștig), roșu cărămidă `#C0392B` (pierdere)
-- **Dark mode = „onsen noaptea”**: fundal maro închis, accente portocalii calde
-
-**Elemente tematice:**
-- [ ] **Bara Coins**: monedă cu fața capibarei
-- [ ] **Roata de premii**: felii de portocală, Bara o învârte
-- [ ] **Sporty-Bara Card**: design capibara (în app + Google Wallet)
-- [ ] **Ranguri** în clasament: Pui de capibara → Capibara de baltă → Capibara de râu → Capibara Alpha → Capibara Legendă
-- [ ] **Insigne / achievements**: „Prima baie” (primul bilet), „Yuzu de aur” (cotă > 10 câștigată), „Zen” (7 zile la rând)
-- [ ] Ligi private: fiecare ligă e o „baltă” 🫧
-- [ ] Font rotunjit, prietenos (ex. Nunito / Baloo 2 din Google Fonts)
-- [ ] Iconițe custom (ex. tab-uri: casă = vizuina, bilete = frunză, clasament = trofeu cu urechi)
-
-**Asset-uri:** desenate / generate de noi sau cu licență liberă — **fără** meme-uri sau imagini cu copyright. Animații Lottie (`com.airbnb.android:lottie`, merge din Java).
-
-## Ecrane
-| Tab / ecran | Conținut |
-|---|---|
-| Onboarding | 3 ecrane cu Bara care explică: cote, monede virtuale, „fără bani reali” |
-| Login / Înregistrare | email + Google |
-| **Acasă** | meciurile zilei (La Liga / Superliga), cota casei vs. cota Sporty-Bara, bonus zilnic |
-| Meci | toate cotele una lângă alta, cea mai bună evidențiată, factori (accidentări etc.), buton „Întreabă-l pe Profesorul Bara” |
-| **Bilete** | bilet curent (slip), bilete active, istoric |
-| **Clasament** | general + ligi private („bălți”) |
-| **Roata** | roata de premii |
-| Card / Plătește | Sporty-Bara Card, tap NFC, mod terminal, Adaugă în Google Wallet |
-| Profil | rang, insigne, statistici, follow, setări |
-| Chat AI | Profesorul Bara |
-| Admin | revizuire `pending_factors` (doar conturi admin) |
-
-Navigație: bottom navigation cu 4–5 tab-uri (Acasă, Bilete, Roata, Clasament, Profil).
+## Design
+Totul e **capybara-themed** (mascota Bara, Profesorul Bara, Bara Coins, ranguri capibara, ligi = „bălți”).
+Planul complet de design — culori, fonturi, componente, ecrane, asset-uri — e în **[DESIGN.md](DESIGN.md)** (îl întreține Erin).
 
 ## Etape
 
