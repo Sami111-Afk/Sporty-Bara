@@ -29,11 +29,57 @@ Aplicație Android pentru urmărirea pariurilor sportive **fără bani reali**:
 | Cote + date | **The Odds API** (cote) + **API-Football** (rezultate, accidentări, echipe) — ambele free |
 | Statistici | Understat (xG), ClubElo, football-data.co.uk, `soccerdata`; vreme Open-Meteo |
 | Scout | Python + Playwright (adaptat din motorul de leads), RSS știri |
-| AI | API LLM extern, apelat doar din Cloud Functions |
+| AI | **Claude Haiku 5.5** (SDK `anthropic`), apelat doar din Cloud Functions |
 | Notificări | Firebase Cloud Messaging |
 | Wallet | Google Wallet API (Generic / Loyalty pass) |
 | NFC | Android HCE (Host Card Emulation) cu AID propriu + mod „terminal” în aplicație |
 | Criptare omomorfă | Paillier — `phe` (Python, server) + `javallier` (Java, app), compatibile |
+
+## Design — tema capibara 🦫
+Toată aplicația e **capybara-themed** (Sporty-**Bara**). Capibara e calmă și „chill” — tonul aplicației: pariuri fără stres, fără bani reali.
+
+**Mascota: Bara** — capibara cu o portocală (yuzu) pe cap, apare peste tot:
+| Situație | Bara |
+|---|---|
+| Bilet câștigat | Bara sărbătorește, portocala sare |
+| Bilet pierdut | Bara stă în apă, „se mai întâmplă” |
+| Încărcare | Bara înoată (animație Lottie) |
+| Ecran gol (fără bilete) | Bara doarme pe iarbă |
+| Eroare / fără internet | Bara confuză |
+| Consultant AI | **Profesorul Bara** — capibara cu ochelari |
+
+**Paletă** (definită în `colors.xml`, light + dark):
+- maro capibara `#8B5E3C` (primar), crem `#F5E6D3` (fundal), portocaliu yuzu `#F39C12` (accent, butoane, monede), verde iarbă/apă `#4CAF50` (câștig), roșu cărămidă `#C0392B` (pierdere)
+- **Dark mode = „onsen noaptea”**: fundal maro închis, accente portocalii calde
+
+**Elemente tematice:**
+- [ ] **Bara Coins**: monedă cu fața capibarei
+- [ ] **Roata de premii**: felii de portocală, Bara o învârte
+- [ ] **Sporty-Bara Card**: design capibara (în app + Google Wallet)
+- [ ] **Ranguri** în clasament: Pui de capibara → Capibara de baltă → Capibara de râu → Capibara Alpha → Capibara Legendă
+- [ ] **Insigne / achievements**: „Prima baie” (primul bilet), „Yuzu de aur” (cotă > 10 câștigată), „Zen” (7 zile la rând)
+- [ ] Ligi private: fiecare ligă e o „baltă” 🫧
+- [ ] Font rotunjit, prietenos (ex. Nunito / Baloo 2 din Google Fonts)
+- [ ] Iconițe custom (ex. tab-uri: casă = vizuina, bilete = frunză, clasament = trofeu cu urechi)
+
+**Asset-uri:** desenate / generate de noi sau cu licență liberă — **fără** meme-uri sau imagini cu copyright. Animații Lottie (`com.airbnb.android:lottie`, merge din Java).
+
+## Ecrane
+| Tab / ecran | Conținut |
+|---|---|
+| Onboarding | 3 ecrane cu Bara care explică: cote, monede virtuale, „fără bani reali” |
+| Login / Înregistrare | email + Google |
+| **Acasă** | meciurile zilei (La Liga / Superliga), cota casei vs. cota Sporty-Bara, bonus zilnic |
+| Meci | toate cotele una lângă alta, cea mai bună evidențiată, factori (accidentări etc.), buton „Întreabă-l pe Profesorul Bara” |
+| **Bilete** | bilet curent (slip), bilete active, istoric |
+| **Clasament** | general + ligi private („bălți”) |
+| **Roata** | roata de premii |
+| Card / Plătește | Sporty-Bara Card, tap NFC, mod terminal, Adaugă în Google Wallet |
+| Profil | rang, insigne, statistici, follow, setări |
+| Chat AI | Profesorul Bara |
+| Admin | revizuire `pending_factors` (doar conturi admin) |
+
+Navigație: bottom navigation cu 4–5 tab-uri (Acasă, Bilete, Roata, Clasament, Profil).
 
 ## Etape
 
@@ -130,11 +176,48 @@ Scop: statisticile de clasament ale unei ligi (profit, rata de câștig, număr 
 - [ ] Notificări: bilet câștigat/pierdut, meci început, invitație în ligă
 - [ ] Polish UI, testare, pregătire prezentare
 
+## Mod demo (pentru prezentare)
+La prezentare s-ar putea să nu fie meciuri live → avem nevoie de date controlate.
+- [ ] **Seed data**: un weekend de meciuri salvat (cote, factori, rezultate) încărcat în Firestore
+- [ ] **Replay**: „derulăm” timpul — meciurile încep / se termină la comandă, biletele se decontează pe loc
+- [ ] Conturi demo cu sold, bilete, ligă, insigne deja făcute
+- [ ] Scenariu Yamal: arătăm cum cota se schimbă când apare o accidentare
+
+## Infrastructură & calitate
+- [ ] **Git**: `main` stabil, lucrăm pe `feature/...`, Pull Request + review între noi
+- [ ] **CI GitHub Actions**: build + teste la fiecare PR (`./gradlew assembleDebug test`) + teste Python (`pytest`)
+- [ ] **Firebase Emulator Suite** pentru dezvoltare locală (Auth, Firestore, Functions) — fără costuri, fără date reale
+- [ ] **Teste**: unit pe model (Python), pe decontare bilete, pe roată (distribuția premiilor), pe NFC (token, replay)
+- [ ] **Firebase App Check** (doar aplicația noastră poate apela funcțiile)
+- [ ] Reguli Firestore testate cu emulatorul
+- [ ] Limită de cheltuieli în Anthropic Console + alerte de buget în Google Cloud
+- [ ] Crashlytics pentru erori din aplicație
+
+## Siguranță, legal, confidențialitate
+- [ ] Mesaj clar în app: **„Fără bani reali. Monedele nu au valoare și nu se pot retrage.”**
+- [ ] Secțiune „Joc responsabil” cu linkuri de ajutor (aplicația e despre pariuri, chiar dacă virtuale)
+- [ ] Politică de confidențialitate minimă (ce date stocăm: email, nume, bilete) + ștergere cont
+- [ ] Scraping: cereri rare, cache, respectăm `robots.txt`; doar pentru proiectul de facultate
+
+## Ce ne trebuie fizic / conturi
+- [ ] **2 telefoane Android cu NFC** — emulatorul **nu** suportă HCE, testarea plăților cere telefoane reale
+- [ ] Cont Firebase / Google Cloud (plan Blaze, card)
+- [ ] Cont **Google Pay & Wallet Console** (emitent de pass-uri) — în modul demo, pass-urile merg pe conturile de test adăugate de noi
+- [ ] Cheie The Odds API, cheie API-Football, cont Anthropic (~$5 credit)
+
+## Documentație (pentru facultate)
+- [ ] Diagrama arhitecturii + fluxuri (bilet, plată NFC, clasament omomorf)
+- [ ] Descrierea modelului de cotă + rezultatele backtest-ului
+- [ ] Rezultatele testării ipotezelor (ce factori contează cu adevărat)
+- [ ] Manual de utilizare + capturi de ecran
+
 ## De decis
 - [x] API cote: **The Odds API** (free, ~500 credite/lună) + **API-Football** (free, 100 cereri/zi) pentru rezultate, accidentări, echipe
 - [x] Ligi: **La Liga (Spania)** + **Superliga României** (maxim 2, ca să rămânem în creditele gratuite: ~8 credite/zi ≈ 240/lună)
   - [ ] De verificat cu `/v4/sports` (0 credite) dacă The Odds API acoperă Superliga; dacă nu → cote RO din API-Football
   - Superliga nu are xG în Understat → modelul RO merge pe goluri reale + Elo
-- [ ] API-ul de AI
+- [x] API AI: **Claude Haiku 5.5** (`claude-haiku-5-5`) — structured outputs pt. Scout, Batch API (-50%) pt. extragere; ~$5 credit acoperă proiectul; spend limit în Console
 - [ ] Împărțirea muncii (cine pe ce etapă)
 - [ ] Termene / data predării
+- [ ] Cine desenează mascota Bara / asset-urile
+- [ ] Limba aplicației: doar RO sau RO + EN
