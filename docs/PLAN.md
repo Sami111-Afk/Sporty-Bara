@@ -132,7 +132,9 @@ Scop: statisticile de clasament ale unei ligi (profit, rata de câștig, număr 
 
 ## De decis
 - [x] API cote: **The Odds API** (free, ~500 credite/lună) + **API-Football** (free, 100 cereri/zi) pentru rezultate, accidentări, echipe
-- [ ] Ce ligi acoperim
+- [x] Ligi: **La Liga (Spania)** + **Superliga României** (maxim 2, ca să rămânem în creditele gratuite: ~8 credite/zi ≈ 240/lună)
+  - [ ] De verificat cu `/v4/sports` (0 credite) dacă The Odds API acoperă Superliga; dacă nu → cote RO din API-Football
+  - Superliga nu are xG în Understat → modelul RO merge pe goluri reale + Elo
 - [ ] API-ul de AI
 - [ ] Împărțirea muncii (cine pe ce etapă)
 - [ ] Termene / data predării
