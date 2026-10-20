@@ -26,7 +26,9 @@ Aplicație Android pentru urmărirea pariurilor sportive **fără bani reali**:
 | Login | Firebase Auth (email + Google) |
 | Bază de date | Cloud Firestore |
 | Backend | Cloud Functions for Firebase (2nd gen) în **Python** — plan **Blaze** necesar pentru apeluri externe |
-| Cote | API extern (de ales, ex. The Odds API) |
+| Cote + date | **The Odds API** (cote) + **API-Football** (rezultate, accidentări, echipe) — ambele free |
+| Statistici | Understat (xG), ClubElo, football-data.co.uk, `soccerdata`; vreme Open-Meteo |
+| Scout | Python + Playwright (adaptat din motorul de leads), RSS știri |
 | AI | API LLM extern, apelat doar din Cloud Functions |
 | Notificări | Firebase Cloud Messaging |
 | Wallet | Google Wallet API (Generic / Loyalty pass) |
