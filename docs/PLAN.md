@@ -58,10 +58,30 @@ Aplicație Android pentru urmărirea pariurilor sportive **fără bani reali**:
 - [ ] Istoric + statistici personale
 
 ### 4. Cota proprie
-- [ ] Eliminarea marjei caselor (probabilități „corecte” din piață)
-- [ ] Model statistic pe echipe (ex. Poisson pe goluri / Elo)
-- [ ] Combinare cu AI → cotă Sporty-Bara
+**Principiu:** cota o calculează un **model matematic** în Python; AI-ul doar transformă știrile în date structurate și explică rezultatul — nu inventează cote.
+
+- [ ] Probabilități „corecte” din piață (eliminarea marjei caselor)
+- [ ] Model de bază: Poisson / Dixon-Coles pe goluri + xG (Understat) + Elo (ClubElo)
+- [ ] Date istorice pentru antrenare/testare: football-data.co.uk (rezultate + cote istorice), biblioteca `soccerdata`
+- [ ] Ajustări din factori (vezi tabelul de mai jos) → **cota Sporty-Bara**
 - [ ] Indicator în UI: corectă / prea mică / prea mare
+- [ ] **Backtest**: modelul vs. cotele caselor pe sezoanele trecute
+- [ ] **Testăm statistic ipotezele** (inclusiv cele „mit”, ex. ziua de naștere) — păstrăm doar factorii cu efect dovedit pe date
+
+#### Factori care pot modifica o cotă
+| Nivel | Factori |
+|---|---|
+| **Mare (dovedit)** | accidentări/suspendări jucători cheie (pondere în xG+xA), portar titular lipsă, executant penalty/faze fixe lipsă, rotație înaintea unui meci mai important, meci fără public / sancțiuni stadion, mișcarea cotelor în piață |
+| **Mediu (real)** | arbitru (cartonașe, penalty-uri), vreme (ploaie, vânt, căldură, zăpadă), altitudine, distanță deplasare + fus orar, gazon sintetic, oboseală (zile odihnă, minute jucate, pauza echipelor naționale), motivație (retrogradare, titlu, meci fără miză), derby, antrenor nou, jucători la limita suspendării |
+| **Mic / de testat** | ziua de naștere a jucătorului, evenimente personale, Ramadan, probleme financiare la club, ora de start |
+
+#### Scout — motor de căutare factori (adaptat din motorul de leads)
+- [ ] Căutări automate per meci (accidentări, echipe probabile, arbitru, știri) în Google News, RSS (Marca, AS, Mundo Deportivo, BBC Sport, GSP), Transfermarkt, FotMob
+- [ ] Surse structurate: API-Football `/injuries`, `/fixtures/lineups`; vreme din Open-Meteo
+- [ ] Deduplicare după URL / hash text
+- [ ] AI extrage factorii în JSON: `{jucator, echipa, status, probabilitate_joaca, sursa, data}`
+- [ ] Pas de revizuire umană: `pending_factors.json` → verificat → aplicat în model
+- [ ] Cereri rare + cache (fără încărcarea site-urilor)
 
 ### 5. Social
 - [ ] Clasament general
@@ -87,9 +107,11 @@ Scop: statisticile de clasament ale unei ligi (profit, rata de câștig, număr 
 - [ ] Animație roată în app (rezultatul vine de la server)
 - [ ] Istoric rotiri
 
-### 6. Asistent AI
-- [ ] Chat „de ce merită / nu merită cota asta” (prin Cloud Function)
-- [ ] Limită de cereri pe utilizator
+### 6. Consultant AI (chat)
+- [ ] Ecran meci: cota casei vs. cota Sporty-Bara + verdict (ex. „casa o dă prea mică”)
+- [ ] Chat „de ce?”: AI-ul primește **doar** datele calculate de noi (factori + surse, xG, Elo, efectul fiecărui factor) și explică pe înțeles
+- [ ] AI-ul citează sursele; dacă nu are informația, spune asta — nu inventează factori
+- [ ] Prin Cloud Function (cheia doar pe server) + limită de cereri pe utilizator
 
 ### 7. Sporty-Bara Card (Wallet + NFC)
 - [ ] Generare card virtual per utilizator (ID card, legat de cont)
@@ -107,7 +129,8 @@ Scop: statisticile de clasament ale unei ligi (profit, rata de câștig, număr 
 - [ ] Polish UI, testare, pregătire prezentare
 
 ## De decis
-- [ ] API-ul de cote (ce ligi / case de pariuri acoperă, limite gratuite)
+- [x] API cote: **The Odds API** (free, ~500 credite/lună) + **API-Football** (free, 100 cereri/zi) pentru rezultate, accidentări, echipe
+- [ ] Ce ligi acoperim
 - [ ] API-ul de AI
 - [ ] Împărțirea muncii (cine pe ce etapă)
 - [ ] Termene / data predării
