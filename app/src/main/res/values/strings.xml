@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Sporty-Bara</string>
+    <string name="hello">Hello Sporty-Bara!</string>
 </resources>

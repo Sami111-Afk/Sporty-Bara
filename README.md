@@ -1,6 +1,6 @@
 # Sporty-Bara
 
-Aplicație Android — Kotlin + Jetpack Compose (Material 3).
+Aplicație Android — Java + XML Views (Material 3).
 
 ## Cerințe
 - Android Studio (ultima versiune stabilă)
