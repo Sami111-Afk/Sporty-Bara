@@ -52,7 +52,7 @@ Valori propuse, **contrastul verificat** (WCAG: ≥ 4.5 pentru text normal).
 | Pierdere | `#EF9A9A` | 7.57 ✅ |
 
 ## 4. Fonturi
-- Font rotunjit, prietenos: **Nunito** sau **Baloo 2** (Google Fonts, gratuite) — de ales.
+- Font rotunjit, prietenos: **Nunito** (Google Fonts, licență OFL) — inclus în `res/font/` (regular, semibold, bold, extrabold).
 - Cifrele (cote, monede) cu cifre de lățime egală (`tnum`), ca să nu „sară” când se schimbă cota.
 - Mărimi: titlu 24sp, subtitlu 18sp, text 16sp, mic 13sp. Respectăm mărirea fontului din setările telefonului.
 
@@ -129,7 +129,7 @@ Desenate sau generate de noi, ori cu licență liberă — **fără** meme-uri s
 
 ## 12. De decis (Erin)
 - [ ] Stilul mascotei și cine o desenează
-- [ ] Fontul: Nunito sau Baloo 2
+- [x] Fontul: Nunito
 - [ ] Culorile finale (pornim de la cele de mai sus)
 - [ ] Figma sau schițe pe hârtie
 - [ ] Limba: doar RO sau RO + EN

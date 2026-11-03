@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- „Onsen noaptea” — docs/DESIGN.md §3 (dark). -->
+<resources>
+    <color name="sb_background">#2B1D14</color>
+    <color name="sb_surface">#3A2A1F</color>
+    <color name="sb_surface_variant">#4A3628</color>
+    <color name="sb_text">#F5E6D3</color>
+    <color name="sb_text_secondary">#CDB8A3</color>
+    <color name="sb_outline">#8A7060</color>
+    <color name="sb_primary">#D7B899</color>
+    <color name="sb_on_primary">#2B1D14</color>
+    <color name="sb_primary_container">#5C3F29</color>
+    <color name="sb_on_primary_container">#F5E6D3</color>
+    <color name="sb_accent">#F39C12</color>
+    <color name="sb_on_accent">#2B1D14</color>
+    <color name="sb_win">#81C784</color>
+    <color name="sb_loss">#EF9A9A</color>
+    <color name="sb_on_loss">#2B1D14</color>
+</resources>

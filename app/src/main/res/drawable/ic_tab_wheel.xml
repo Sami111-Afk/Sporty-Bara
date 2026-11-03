@@ -1,0 +1,5 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24" android:tint="?attr/colorControlNormal">
+    <!-- felie de portocală / roată -->
+    <path android:fillColor="@android:color/transparent" android:strokeColor="@android:color/white" android:strokeWidth="2" android:pathData="M12,3a9,9 0,1 1,0 18a9,9 0,1 1,0 -18z"/>
+    <path android:fillColor="@android:color/transparent" android:strokeColor="@android:color/white" android:strokeWidth="1.6" android:strokeLineCap="round" android:pathData="M12,5.5V18.5M5.5,12H18.5M7.4,7.4L16.6,16.6M16.6,7.4L7.4,16.6"/>
+</vector>
