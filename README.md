@@ -22,6 +22,9 @@ Din terminal:
 ## Documente
 - [Plan proiect](docs/PLAN.md)
 - [Plan de design](docs/DESIGN.md)
+- [Plan Erin](docs/PLAN-ERIN.md) · [Plan Sami](docs/PLAN-SAMI.md)
+- [Contract de date](docs/API.md)
+- [Cum lucrăm (branch-uri, PR)](CONTRIBUTING.md)
 
 ## Workflow
 - `main` = stabil; lucrăm pe branch-uri (`feature/...`) și facem Pull Request.

@@ -14,3 +14,9 @@
 *.jks
 *.keystore
 google-services.json
+# Python / Firebase
+__pycache__/
+.pytest_cache/
+functions/venv/
+*-debug.log
+.firebase/

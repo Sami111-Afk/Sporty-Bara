@@ -1,0 +1,21 @@
+rules_version = '2';
+
+// Versiune minimă pentru emulator. Regulile complete vin în #17.
+// Principiu: clientul doar citește; soldul, biletele și tranzacțiile se scriu
+// numai din Cloud Functions (Admin SDK ocolește regulile).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+    }
+    match /profiles/{uid} {
+      allow read: if request.auth != null;
+    }
+    match /matches/{matchId}/{document=**} {
+      allow read: if request.auth != null;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

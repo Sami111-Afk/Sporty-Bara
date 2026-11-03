@@ -61,7 +61,9 @@ Fiecare face funcționalitățile lui **cap la coadă**: ecranul (Java + XML) + 
 - Card: NFC (HCE, mod terminal, tokenuri)
 - Notificări, diagrame, documentația modelului
 
-**Legături între părți** (de stabilit în `docs/API.md`): biletele folosesc cotele; clasamentul din bălți folosește criptarea; cardul (Wallet) + NFC folosesc același ID de card.
+Planuri pe persoană, cu task-urile din GitHub: **[PLAN-ERIN.md](PLAN-ERIN.md)** · **[PLAN-SAMI.md](PLAN-SAMI.md)**.
+
+**Legături între părți** (în [`docs/API.md`](API.md)): biletele folosesc cotele; clasamentul din bălți folosește criptarea; cardul (Wallet) + NFC folosesc același ID de card.
 
 ## Etape
 
