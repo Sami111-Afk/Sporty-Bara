@@ -19,13 +19,14 @@ FOOTBALL_TERMS = (
     # es
     "lesi", "baja", "alinea", "convoca", "sanci", "arbitr", "titular", "entrenador",
     "partido", "jornada", "laliga", "gol", "delanter", "portero", "defensa", "medic",
-    "recuper", "plantilla", "fichaje", "once ",
+    "recuper", "plantilla", "fichaje", "once ", "vuelve", "regres",
     # en
     "injur", "team news", "lineup", "line-up", "squad", "suspen", "ruled out", "doubt",
     "fitness", "coach", "manager", "match", "fixture", "striker", "goalkeeper",
+    "back for", "return", "boost", "blow",
     # ro
     "accident", "echip", "lotul", "meci", "antrenor", "fotbal", "superliga", "jucator",
-    "atacant", "portar", "fundas", "transfer",
+    "atacant", "portar", "fundas", "transfer", "revine", "revenire",
 )
 
 
