@@ -21,3 +21,6 @@ functions/venv/
 *-debug.log
 .firebase/
 node_modules/
+
+# copii de lucru locale
+.claude/

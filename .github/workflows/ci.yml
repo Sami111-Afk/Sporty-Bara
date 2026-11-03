@@ -34,7 +34,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -r requirements-dev.txt
+      - run: pip install -r requirements.txt -r requirements-dev.txt
       - run: python -m pytest -q tests
 
   rules:
@@ -52,4 +52,4 @@ jobs:
           distribution: temurin
           java-version: "21"
       - run: npm ci --prefix firestore-tests
-      - run: npx --yes firebase-tools emulators:exec --only firestore --project demo-sporty-bara "npm --prefix firestore-tests test"
+      - run: npx --yes firebase-tools@15.14.0 emulators:exec --only firestore --project demo-sporty-bara "npm --prefix firestore-tests test"

@@ -133,7 +133,7 @@ describe("tickets", () => {
   it("urmăritorul poate lista biletele celui urmărit (query filtrat pe uid)", async () => {
     await assertSucceeds(getDocs(query(collection(bob(), "tickets"), where("uid", "==", "ana"))));
   });
-  it("query pe biletele altcuiva nenurmărit pică", async () => {
+  it("query pe biletele altcuiva neurmărit pică", async () => {
     await assertFails(getDocs(query(collection(cris(), "tickets"), where("uid", "==", "ana"))));
   });
   it("clientul NU poate crea bilete", async () => {
@@ -197,6 +197,12 @@ describe("league_stats", () => {
   });
   it("non-membrul NU citește", async () => {
     await assertFails(getDoc(doc(cris(), "league_stats/l1_ana")));
+  });
+  it("membrul listează statisticile ligii (query filtrat pe leagueId, ca în clasament)", async () => {
+    await assertSucceeds(getDocs(query(collection(bob(), "league_stats"), where("leagueId", "==", "l1"))));
+  });
+  it("non-membrul NU listează statisticile ligii", async () => {
+    await assertFails(getDocs(query(collection(cris(), "league_stats"), where("leagueId", "==", "l1"))));
   });
   it("clientul nu scrie", async () => {
     await assertFails(setDoc(doc(ana(), "league_stats/l1_ana"), { leagueId: "l1", uid: "ana" }));
