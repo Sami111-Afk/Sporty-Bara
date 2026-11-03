@@ -23,11 +23,11 @@ GOOGLE_LOCALES = {
     "en": ("en-GB", "GB"),
 }
 
-# fluxuri fixe ale presei sportive, verificate cu curl pe 03-11-2026
-# (răspund cu RSS valid; GSP are /rss.xml, /rss și /feed dau 404)
+# fluxuri fixe ale presei sportive, verificate pe 03-11-2026: RSS valid și articole
+# de azi. GSP are /rss.xml (/rss și /feed dau 404). AS a fost scos: fluxurile
+# as.com/rss/tags/ultimas_noticias.xml și futbol/primera.xml au articole doar din 2022-2024.
 FEEDS = [
     ("Marca", "https://e00-marca.uecdn.es/rss/futbol/primera-division.xml"),
-    ("AS", "https://as.com/rss/tags/ultimas_noticias.xml"),
     ("Mundo Deportivo", "https://www.mundodeportivo.com/feed/rss/home"),
     ("BBC Sport", "https://feeds.bbci.co.uk/sport/football/rss.xml"),
     ("GSP", "https://www.gsp.ro/rss.xml"),
