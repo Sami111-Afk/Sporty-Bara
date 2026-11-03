@@ -22,6 +22,10 @@ functions/venv/
 .firebase/
 node_modules/
 
+# Model: cache date + venv local
+functions/.data/
+functions/.venv/
+
 # copii de lucru locale
 .claude/
 
