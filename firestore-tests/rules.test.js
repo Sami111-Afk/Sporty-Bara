@@ -130,6 +130,9 @@ describe("tickets", () => {
   it("query filtrat pe uid propriu merge", async () => {
     await assertSucceeds(getDocs(query(collection(ana(), "tickets"), where("uid", "==", "ana"))));
   });
+  it("urmăritorul poate lista biletele celui urmărit (query filtrat pe uid)", async () => {
+    await assertSucceeds(getDocs(query(collection(bob(), "tickets"), where("uid", "==", "ana"))));
+  });
   it("query pe biletele altcuiva nenurmărit pică", async () => {
     await assertFails(getDocs(query(collection(cris(), "tickets"), where("uid", "==", "ana"))));
   });
