@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  android:
+    name: Android (build + teste)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+      - uses: android-actions/setup-android@v3
+        with:
+          # implicit instalează și pachetul vechi „tools”, care nu mai există
+          packages: "platform-tools platforms;android-36.1 build-tools;36.0.0"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build + teste unitare
+        run: ./gradlew assembleDebug test --console=plain
+
+  functions:
+    name: Functions Python (teste)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: functions
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt -r requirements-dev.txt
+      - run: python -m pytest -q tests
