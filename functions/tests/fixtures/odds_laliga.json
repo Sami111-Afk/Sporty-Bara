@@ -1,0 +1,180 @@
+[
+  {
+    "id": "e912304de2b2ce35b473ce2ecd3d1502",
+    "sport_key": "soccer_spain_la_liga",
+    "commence_time": "2026-11-08T20:00:00Z",
+    "home_team": "Barcelona",
+    "away_team": "Sevilla",
+    "bookmakers": [
+      {
+        "key": "unibet_eu",
+        "title": "Unibet",
+        "last_update": "2026-11-03T10:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-11-03T10:00:00Z",
+            "outcomes": [
+              {"name": "Barcelona", "price": 1.45},
+              {"name": "Sevilla", "price": 6.5},
+              {"name": "Draw", "price": 4.6}
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bet365",
+        "title": "bet365",
+        "last_update": "2026-11-03T10:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-11-03T10:00:00Z",
+            "outcomes": [
+              {"name": "Barcelona", "price": 1.5},
+              {"name": "Sevilla", "price": 6.0},
+              {"name": "Draw", "price": 4.4}
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair_ex_eu",
+        "title": "Betfair Exchange",
+        "last_update": "2026-11-03T10:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-11-03T10:00:00Z",
+            "outcomes": [
+              {"name": "Barcelona", "price": 1.9},
+              {"name": "Sevilla", "price": 7.2}
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "7c1a0f3e9b2d4e6f8a1b3c5d7e9f0a1b",
+    "sport_key": "soccer_spain_la_liga",
+    "commence_time": "2026-11-09T18:30:00Z",
+    "home_team": "Atlético de Madrid",
+    "away_team": "Real Betis",
+    "bookmakers": [
+      {
+        "key": "unibet_eu",
+        "title": "Unibet",
+        "last_update": "2026-11-03T10:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-11-03T10:00:00Z",
+            "outcomes": [
+              {"name": "Atlético de Madrid", "price": 2.1},
+              {"name": "Real Betis", "price": 3.6},
+              {"name": "Draw", "price": 3.3}
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bet365",
+        "title": "bet365",
+        "last_update": "2026-11-03T10:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-11-03T10:00:00Z",
+            "outcomes": [
+              {"name": "Atlético de Madrid", "price": 2.05},
+              {"name": "Real Betis", "price": 3.7},
+              {"name": "Draw", "price": 3.4}
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill",
+        "title": "William Hill",
+        "last_update": "2026-11-03T10:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-11-03T10:00:00Z",
+            "outcomes": [
+              {"name": "Atlético de Madrid", "price": 2.12},
+              {"name": "Real Betis", "price": 3.55},
+              {"name": "Draw", "price": 3.25}
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "b3d5f7a9c1e2f4a6b8d0e2f4a6c8e0f2",
+    "sport_key": "soccer_spain_la_liga",
+    "commence_time": "2026-11-09T16:15:00Z",
+    "home_team": "Athletic Club",
+    "away_team": "Celta de Vigo",
+    "bookmakers": [
+      {
+        "key": "unibet_eu",
+        "title": "Unibet",
+        "last_update": "2026-11-03T10:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-11-03T10:00:00Z",
+            "outcomes": [
+              {"name": "Athletic Club", "price": 1.95},
+              {"name": "Celta de Vigo", "price": 4.2},
+              {"name": "Draw", "price": 3.5}
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bet365",
+        "title": "bet365",
+        "last_update": "2026-11-03T10:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-11-03T10:00:00Z",
+            "outcomes": [
+              {"name": "Athletic Club", "price": 2.0},
+              {"name": "Celta de Vigo", "price": 4.1},
+              {"name": "Draw", "price": 3.4}
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "d4e6a8c0e2f4a6b8c0d2e4f6a8b0c2d4",
+    "sport_key": "soccer_spain_la_liga",
+    "commence_time": "2026-11-10T19:00:00Z",
+    "home_team": "Girona",
+    "away_team": "Getafe",
+    "bookmakers": [
+      {
+        "key": "unibet_eu",
+        "title": "Unibet",
+        "last_update": "2026-11-03T10:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-11-03T10:00:00Z",
+            "outcomes": [
+              {"name": "Girona", "price": 1.7},
+              {"name": "Getafe", "price": 5.0}
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

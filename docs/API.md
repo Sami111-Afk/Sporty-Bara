@@ -103,7 +103,7 @@ Cota folosită la plasare = `bestOdds` din momentul plasării; se salvează pe b
 | `createdAt` | Timestamp | |
 
 `leagues/{leagueId}/keys/{uid}`: `{encryptedPrivateKey}` — cheia ligii criptată pentru fiecare membru (#22).
-`league_stats/{leagueId}_{uid}`: `{encProfit, encWon, encTotal}` — ciphertext Paillier (string) (#22).
+`league_stats/{leagueId}_{uid}`: `{leagueId, uid, encProfit, encWon, encTotal}` — ciphertext Paillier (string) (#22). `leagueId` și `uid` sunt necesare ca regulile Firestore să verifice că cititorul e membru al ligii.
 
 ### `follows/{uid}/following/{otherUid}`
 `{createdAt}`
