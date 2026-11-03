@@ -16,8 +16,12 @@ from .rss import FEEDS, fetch, google_news_url, parse_feed
 log = logging.getLogger(__name__)
 
 
-def collect(session, match: dict, since: datetime, delay: float = 1.0) -> list[Article]:
-    """Articolele relevante pentru meci, fără dubluri.
+MAX_ARTICLES = 40  # limită per meci: fiecare articol costă un apel la extractor
+
+
+def collect(session, match: dict, since: datetime, delay: float = 1.0,
+            max_articles: int = MAX_ARTICLES) -> list[Article]:
+    """Articolele relevante pentru meci, fără dubluri, cele mai recente primele (cel mult max_articles).
 
     match: {"id", "home", "away", "league"}. `since` trebuie să fie aware (UTC).
     Erorile de rețea la un flux sunt doar logate, nu opresc restul.
@@ -41,8 +45,10 @@ def collect(session, match: dict, since: datetime, delay: float = 1.0) -> list[A
             continue
         articles += parse_feed(content, name, "")
 
-    relevant = [a for a in articles if is_relevant(a, home, away, since)]
-    return dedup(relevant)
+    relevant = dedup([a for a in articles if is_relevant(a, home, away, since)])
+    # cele mai noi primele; articolele fără dată la final
+    relevant.sort(key=lambda a: (a.published is not None, a.published or since), reverse=True)
+    return relevant[:max_articles]
 
 
 def run(session, match: dict, extractor: Extractor, since: datetime, delay: float = 1.0) -> list[dict]:

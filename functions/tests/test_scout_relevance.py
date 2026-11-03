@@ -49,3 +49,12 @@ def test_old_article_is_not_relevant():
 def test_article_without_date_is_relevant():
     undated = _article("Barcelona lesión", published=None)
     assert is_relevant(undated, "Barcelona", "Sevilla", SINCE)
+
+
+def test_city_news_is_not_relevant():
+    # „Barcelona” orașul, nu echipa
+    assert not is_relevant(_article("El alquiler medio sube en Barcelona"), "Barcelona", "Sevilla", SINCE)
+
+
+def test_both_teams_mentioned_is_relevant_without_keywords():
+    assert is_relevant(_article("Barcelona y Sevilla, cara a cara"), "Barcelona", "Sevilla", SINCE)
