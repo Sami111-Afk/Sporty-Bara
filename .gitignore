@@ -20,3 +20,6 @@ __pycache__/
 functions/venv/
 *-debug.log
 .firebase/
+
+# copii de lucru locale
+.claude/
