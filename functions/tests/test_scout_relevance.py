@@ -58,3 +58,20 @@ def test_city_news_is_not_relevant():
 
 def test_both_teams_mentioned_is_relevant_without_keywords():
     assert is_relevant(_article("Barcelona y Sevilla, cara a cara"), "Barcelona", "Sevilla", SINCE)
+
+
+def test_terms_match_at_word_start_only():
+    # „golf” nu e „gol”, „medicina” nu e „médico”, „returned” nu e „return”
+    assert not is_relevant(_article("Barcelona acoge un torneo de golf"), "Barcelona", "Sevilla", SINCE)
+    assert not is_relevant(_article("Barcelona, capital de la medicina"), "Barcelona", "Sevilla", SINCE)
+    assert not is_relevant(_article("Tourists returned to Barcelona"), "Barcelona", "Sevilla", SINCE)
+
+
+def test_spanish_road_accident_is_not_football():
+    assert not is_relevant(_article("Accidente de tráfico en Barcelona"), "Barcelona", "Sevilla", SINCE)
+
+
+def test_injury_terms_still_match():
+    assert is_relevant(_article("Lesión de Lewandowski: el Barcelona confirma la baja"), "Barcelona", "Sevilla", SINCE)
+    assert is_relevant(_article("Barcelona: gol de Yamal en el entrenamiento"), "Barcelona", "Sevilla", SINCE)
+    assert is_relevant(_article("FCSB: Olaru, accidentat"), "FCSB", "Rapid", SINCE)

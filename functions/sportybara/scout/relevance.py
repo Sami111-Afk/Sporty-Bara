@@ -13,26 +13,34 @@ def _mentions(text: str, name: str) -> bool:
     return re.search(pattern, strip_diacritics(text).lower()) is not None
 
 
-# rădăcini de cuvinte din fotbal (fără diacritice); „Barcelona” singur prinde și știri
-# despre oraș (vreme, chirii), așa că cerem și un context de fotbal sau ambele echipe
-FOOTBALL_TERMS = (
+# context de fotbal: „Barcelona” singur prinde și știri despre oraș (vreme, chirii),
+# așa că cerem și un termen de fotbal sau ambele echipe. Termenii se potrivesc la
+# ÎNCEPUT de cuvânt (fără diacritice): „lesi” prinde „lesión”, dar „gol” NU prinde „golf”.
+FOOTBALL_PREFIXES = (
     # es
-    "lesi", "baja", "alinea", "convoca", "sanci", "arbitr", "titular", "entrenador",
-    "partido", "jornada", "laliga", "gol", "delanter", "portero", "defensa", "medic",
-    "recuper", "plantilla", "fichaje", "once ", "vuelve", "regres",
+    "lesion", "lesiona", "alineaci", "convocatori", "sancion", "arbitr", "titular",
+    "entrenador", "partido", "jornada", "laliga", "delanter", "portero", "recupera",
+    "plantilla", "fichaj", "regres",
     # en
-    "injur", "team news", "lineup", "line-up", "squad", "suspen", "ruled out", "doubt",
-    "fitness", "coach", "manager", "match", "fixture", "striker", "goalkeeper",
-    "back for", "return", "boost", "blow",
+    "injur", "lineup", "line-up", "squad", "suspen", "fitness", "striker", "goalkeeper",
     # ro
-    "accident", "echip", "lotul", "meci", "antrenor", "fotbal", "superliga", "jucator",
-    "atacant", "portar", "fundas", "transfer", "revine", "revenire",
+    "accidentat", "accidentar", "echip", "meci", "antrenor", "fotbal", "superliga",
+    "jucator", "atacant", "portar", "fundas", "transfer", "revine", "revenire",
+)
+# cuvinte care au sens de fotbal doar întregi (ca prefix ar prinde „golf”, „medicina”, „returned”)
+FOOTBALL_WORDS = (
+    "gol", "goles", "golazo", "baja", "bajas", "medico", "vuelve", "once",
+    "team news", "ruled out", "doubt", "doubtful", "coach", "manager", "match", "fixture",
+    "back for", "return", "returns", "boost", "blow", "lotul",
+)
+_FOOTBALL_RE = re.compile(
+    r"\b(?:" + "|".join(re.escape(p) for p in FOOTBALL_PREFIXES) + r")"
+    + r"|\b(?:" + "|".join(re.escape(w) for w in FOOTBALL_WORDS) + r")\b"
 )
 
 
 def _football_context(text: str) -> bool:
-    norm = strip_diacritics(text).lower()
-    return any(term in norm for term in FOOTBALL_TERMS)
+    return _FOOTBALL_RE.search(strip_diacritics(text).lower()) is not None
 
 
 def is_relevant(article: Article, home: str, away: str, since: datetime) -> bool:

@@ -33,6 +33,18 @@ FEEDS = [
     ("GSP", "https://www.gsp.ro/rss.xml"),
 ]
 
+# ce fluxuri contează pentru fiecare ligă (presa spaniolă nu scrie despre Superliga)
+LEAGUE_FEEDS = {
+    "laliga": ("Marca", "Mundo Deportivo", "BBC Sport"),
+    "superliga": ("GSP",),
+}
+
+
+def feeds_for(league: str) -> list[tuple[str, str]]:
+    """Fluxurile fixe pentru o ligă, ca (nume, url)."""
+    wanted = LEAGUE_FEEDS.get(league, ())
+    return [(name, url) for name, url in FEEDS if name in wanted]
+
 
 def google_news_url(query: str, lang: str) -> str:
     """URL-ul RSS Google News pentru o căutare în limba dată."""

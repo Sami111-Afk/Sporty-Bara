@@ -8,7 +8,7 @@ from sportybara.scout.models import Factor
 from sportybara.scout.pending import to_pending_docs
 from sportybara.scout.pipeline import collect, run
 from sportybara.scout.queries import build_queries
-from sportybara.scout.rss import FEEDS
+from sportybara.scout.rss import feeds_for
 
 FIXTURES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures", "scout")
 SINCE = datetime(2000, 1, 1, tzinfo=timezone.utc)
@@ -91,7 +91,7 @@ def test_to_pending_docs_date_is_utc():
 def test_collect_makes_one_request_per_query_and_feed():
     session = FixtureSession()
     collect(session, MATCH, SINCE, delay=0)
-    expected = len(build_queries("Barcelona", "Arsenal", "laliga")) + len(FEEDS)
+    expected = len(build_queries("Barcelona", "Arsenal", "laliga")) + len(feeds_for("laliga"))
     assert len(session.calls) == expected
 
 
@@ -123,3 +123,20 @@ def test_run_turns_factors_into_pending_docs():
     assert all(d["matchId"] == "m1" and d["status"] == "pending" for d in docs)
     # extractorul primește echipele din meci
     assert extractor.calls[0][1:] == ("Barcelona", "Arsenal")
+
+
+def test_superliga_uses_only_romanian_feeds():
+    session = FixtureSession()
+    collect(session, {"id": "m2", "home": "FCSB", "away": "Rapid", "league": "superliga"}, SINCE, delay=0)
+    fixed = [u for u in session.calls if "news.google.com" not in u]
+    assert fixed == [u for _, u in feeds_for("superliga")]
+    assert not any("marca" in u or "mundodeportivo" in u or "bbci" in u for u in session.calls)
+
+
+def test_fixed_feeds_downloaded_once_per_run():
+    session = FixtureSession()
+    cache = {}
+    collect(session, MATCH, SINCE, delay=0, feed_cache=cache)
+    collect(session, {"id": "m3", "home": "Sevilla", "away": "Betis", "league": "laliga"}, SINCE, delay=0, feed_cache=cache)
+    for _, url in feeds_for("laliga"):
+        assert session.calls.count(url) == 1

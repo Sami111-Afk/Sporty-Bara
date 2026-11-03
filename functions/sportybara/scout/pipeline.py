@@ -11,7 +11,7 @@ from .models import Article
 from .pending import to_pending_docs
 from .queries import build_queries
 from .relevance import is_relevant
-from .rss import FEEDS, fetch, google_news_url, parse_feed
+from .rss import feeds_for, fetch, google_news_url, parse_feed
 
 log = logging.getLogger(__name__)
 
@@ -20,10 +20,12 @@ MAX_ARTICLES = 40  # limită per meci: fiecare articol costă un apel la extract
 
 
 def collect(session, match: dict, since: datetime, delay: float = 1.0,
-            max_articles: int = MAX_ARTICLES) -> list[Article]:
+            max_articles: int = MAX_ARTICLES, feed_cache: dict | None = None) -> list[Article]:
     """Articolele relevante pentru meci, fără dubluri, cele mai recente primele (cel mult max_articles).
 
     match: {"id", "home", "away", "league"}. `since` trebuie să fie aware (UTC).
+    feed_cache: dict url → conținut, comun pentru toate meciurile dintr-o rulare,
+    ca fluxurile fixe (Marca, GSP...) să se descarce o singură dată.
     Erorile de rețea la un flux sunt doar logate, nu opresc restul.
     """
     home, away = match["home"], match["away"]
@@ -37,13 +39,16 @@ def collect(session, match: dict, since: datetime, delay: float = 1.0,
             continue
         articles += parse_feed(content, "Google News", query)
 
-    for name, url in FEEDS:
-        try:
-            content = fetch(session, url, delay)
-        except requests.RequestException as exc:
-            log.warning("flux %s eșuat: %s", name, exc)
-            continue
-        articles += parse_feed(content, name, "")
+    if feed_cache is None:
+        feed_cache = {}
+    for name, url in feeds_for(match["league"]):
+        if url not in feed_cache:
+            try:
+                feed_cache[url] = fetch(session, url, delay)
+            except requests.RequestException as exc:
+                log.warning("flux %s eșuat: %s", name, exc)
+                continue
+        articles += parse_feed(feed_cache[url], name, "")
 
     relevant = dedup([a for a in articles if is_relevant(a, home, away, since)])
     # cele mai noi primele; articolele fără dată la final
@@ -51,10 +56,11 @@ def collect(session, match: dict, since: datetime, delay: float = 1.0,
     return relevant[:max_articles]
 
 
-def run(session, match: dict, extractor: Extractor, since: datetime, delay: float = 1.0) -> list[dict]:
+def run(session, match: dict, extractor: Extractor, since: datetime, delay: float = 1.0,
+        feed_cache: dict | None = None) -> list[dict]:
     """collect + extragerea factorilor din fiecare articol → documente pending."""
     home, away = match["home"], match["away"]
     factors = []
-    for article in collect(session, match, since, delay=delay):
+    for article in collect(session, match, since, delay=delay, feed_cache=feed_cache):
         factors.extend(extractor.extract(article, home, away))
     return to_pending_docs(match["id"], factors)
