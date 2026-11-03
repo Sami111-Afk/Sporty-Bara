@@ -23,3 +23,6 @@ functions/venv/
 
 # copii de lucru locale
 .claude/
+
+# Scout venv local
+functions/.venv/
