@@ -16,8 +16,9 @@ jobs:
           distribution: temurin
           java-version: "25"
       - uses: android-actions/setup-android@v3
-      - name: Instalare SDK Android 36.1
-        run: sdkmanager "platforms;android-36.1" "build-tools;36.0.0"
+        with:
+          # implicit instalează și pachetul vechi „tools”, care nu mai există
+          packages: "platform-tools platforms;android-36.1 build-tools;36.0.0"
       - uses: gradle/actions/setup-gradle@v4
       - name: Build + teste unitare
         run: ./gradlew assembleDebug test --console=plain
