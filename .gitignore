@@ -20,3 +20,7 @@ __pycache__/
 functions/venv/
 *-debug.log
 .firebase/
+
+# Model: cache date + venv local
+functions/.data/
+functions/.venv/
