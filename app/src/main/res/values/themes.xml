@@ -1,7 +1,45 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tema Sporty-Bara. Culorile se schimbă singure în dark mode (values-night/colors.xml). -->
+<resources>
     <style name="Base.Theme.SportyBara" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/green_primary</item>
-        <item name="colorSecondary">@color/orange_accent</item>
+        <item name="colorPrimary">@color/sb_primary</item>
+        <item name="colorOnPrimary">@color/sb_on_primary</item>
+        <item name="colorPrimaryContainer">@color/sb_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/sb_on_primary_container</item>
+        <item name="colorSecondary">@color/sb_accent</item>
+        <item name="colorOnSecondary">@color/sb_on_accent</item>
+        <item name="colorSecondaryContainer">@color/sb_accent</item>
+        <item name="colorOnSecondaryContainer">@color/sb_on_accent</item>
+        <item name="colorTertiary">@color/sb_win</item>
+        <item name="colorError">@color/sb_loss</item>
+        <item name="colorOnError">@color/sb_on_loss</item>
+        <item name="android:colorBackground">@color/sb_background</item>
+        <item name="colorOnBackground">@color/sb_text</item>
+        <item name="colorSurface">@color/sb_background</item>
+        <item name="colorOnSurface">@color/sb_text</item>
+        <item name="colorSurfaceVariant">@color/sb_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/sb_text_secondary</item>
+        <item name="colorSurfaceContainer">@color/sb_surface</item>
+        <item name="colorSurfaceContainerLow">@color/sb_surface</item>
+        <item name="colorSurfaceContainerHigh">@color/sb_surface</item>
+        <item name="colorOutline">@color/sb_outline</item>
+
+
+        <!-- Font -->
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.SportyBara.Title</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.SportyBara.Title</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.SportyBara.Subtitle</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.SportyBara.Body</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.SportyBara.Body</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.SportyBara.Small</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.SportyBara.Button</item>
+
+        <!-- Componente -->
+        <item name="materialButtonStyle">@style/Widget.SportyBara.Button</item>
+        <item name="materialCardViewStyle">@style/Widget.SportyBara.Card</item>
+        <item name="bottomNavigationStyle">@style/Widget.SportyBara.BottomNavigation</item>
     </style>
 
     <style name="Theme.SportyBara" parent="Base.Theme.SportyBara" />

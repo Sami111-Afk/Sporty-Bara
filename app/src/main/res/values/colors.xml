@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Paleta din docs/DESIGN.md §3 (light). Varianta dark e în values-night/colors.xml. -->
 <resources>
-    <color name="green_primary">#2E7D32</color>
-    <color name="green_light">#A5D6A7</color>
-    <color name="orange_accent">#EF6C00</color>
-    <color name="orange_light">#FFCC80</color>
+    <color name="sb_background">#F5E6D3</color>       <!-- crem -->
+    <color name="sb_surface">#FFF8EF</color>          <!-- carduri, bara de jos -->
+    <color name="sb_surface_variant">#EAD7C0</color>
+    <color name="sb_text">#3E2A1E</color>             <!-- maro închis -->
+    <color name="sb_text_secondary">#6B5444</color>
+    <color name="sb_outline">#B89A80</color>
+    <color name="sb_primary">#8B5E3C</color>          <!-- maro capibara -->
+    <color name="sb_on_primary">#FFFFFF</color>
+    <color name="sb_primary_container">#E9CFB4</color>
+    <color name="sb_on_primary_container">#3E2A1E</color>
+    <!-- Portocaliul yuzu: DOAR ca fundal, cu text sb_on_accent. Niciodată ca text. -->
+    <color name="sb_accent">#F39C12</color>
+    <color name="sb_on_accent">#3E2A1E</color>
+    <color name="sb_win">#1E6B2A</color>
+    <color name="sb_loss">#A93226</color>
+    <color name="sb_on_loss">#FFFFFF</color>
 </resources>

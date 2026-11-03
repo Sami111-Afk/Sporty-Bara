@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Sporty-Bara</string>
-    <string name="hello">Hello Sporty-Bara!</string>
+
+    <!-- Tab-uri -->
+    <string name="tab_home">Acasă</string>
+    <string name="tab_tickets">Bilete</string>
+    <string name="tab_wheel">Roata</string>
+    <string name="tab_leaderboard">Clasament</string>
+    <string name="tab_profile">Profil</string>
+
+    <!-- Ecrane goale (până vin ecranele reale) -->
+    <string name="empty_home">Bara caută meciurile zilei… 🍊</string>
+    <string name="empty_tickets">Niciun bilet încă. Bara doarme pe iarbă 💤</string>
+    <string name="empty_wheel">Roata se învârte în curând.</string>
+    <string name="empty_leaderboard">Clasamentul și bălțile vin în curând 🫧</string>
+    <string name="empty_profile">Profilul tău de capibara vine în curând.</string>
 </resources>

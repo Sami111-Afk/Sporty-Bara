@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Stiluri de bază (docs/DESIGN.md §4, §5, §10). Mărimi în sp: respectă fontul din setări. -->
+<resources>
+    <!-- Text: titlu 24, subtitlu 18, text 16, mic 13 -->
+    <style name="TextAppearance.SportyBara.Title" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="TextAppearance.SportyBara.Subtitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="TextAppearance.SportyBara.Body" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="TextAppearance.SportyBara.Small" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+    <style name="TextAppearance.SportyBara.Button" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <!-- Cote și monede: cifre de lățime egală, ca să nu „sară” -->
+    <style name="TextAppearance.SportyBara.Number" parent="TextAppearance.SportyBara.Subtitle">
+        <item name="android:fontFeatureSettings">tnum</item>
+    </style>
+    <style name="TextAppearance.SportyBara.Win" parent="TextAppearance.SportyBara.Number">
+        <item name="android:textColor">@color/sb_win</item>
+    </style>
+    <style name="TextAppearance.SportyBara.Loss" parent="TextAppearance.SportyBara.Number">
+        <item name="android:textColor">@color/sb_loss</item>
+    </style>
+
+    <!-- Butoane: minim 48dp, colțuri rotunde -->
+    <style name="Widget.SportyBara.Button" parent="Widget.Material3.Button">
+        <item name="android:minHeight">52dp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.SportyBara.Button</item>
+    </style>
+    <!-- Buton portocaliu (monede, roata): text maro închis, niciodată alb -->
+    <style name="Widget.SportyBara.Button.Accent">
+        <item name="backgroundTint">@color/sb_accent</item>
+        <item name="android:textColor">@color/sb_on_accent</item>
+        <item name="iconTint">@color/sb_on_accent</item>
+    </style>
+    <style name="Widget.SportyBara.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">52dp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.SportyBara.Button</item>
+    </style>
+
+    <style name="Widget.SportyBara.Card" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/sb_surface</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="contentPadding">16dp</item>
+    </style>
+
+    <style name="Widget.SportyBara.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="backgroundTint">@color/sb_surface</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.SportyBara.BottomNavigation.Indicator</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.SportyBara.NavLabel</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.SportyBara.NavLabel</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+    <style name="Widget.SportyBara.BottomNavigation.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/sb_accent</item>
+    </style>
+    <style name="TextAppearance.SportyBara.NavLabel" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>
