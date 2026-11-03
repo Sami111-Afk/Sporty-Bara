@@ -1,19 +1,119 @@
 rules_version = '2';
 
-// Versiune minimă pentru emulator. Regulile complete vin în #17.
 // Principiu: clientul doar citește; soldul, biletele și tranzacțiile se scriu
-// numai din Cloud Functions (Admin SDK ocolește regulile).
+// numai din Cloud Functions (Admin SDK ocolește regulile). Deci write = false peste tot.
+//
+// Atenție la query-uri de tip listă: regulile pe resource.data.uid merg doar cu
+// query-uri filtrate, deci app-ul trebuie să facă whereEqualTo("uid", uid)
+// (tickets, transactions, wheel_spins, cards) și whereArrayContains("members", uid)
+// pentru leagues. Un query fără filtru e respins în întregime.
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    // Liga există și utilizatorul curent e în members
+    function isLeagueMember(leagueId) {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/leagues/$(leagueId))
+        && request.auth.uid in get(/databases/$(database)/documents/leagues/$(leagueId)).data.members;
+    }
+
+    // Privat: doar proprietarul
     match /users/{uid} {
-      allow read: if request.auth != null && request.auth.uid == uid;
+      allow read: if isOwner(uid);
+      allow write: if false;
     }
+
+    // Public pentru orice utilizator logat
     match /profiles/{uid} {
-      allow read: if request.auth != null;
+      allow read: if isSignedIn();
+      allow write: if false;
     }
-    match /matches/{matchId}/{document=**} {
-      allow read: if request.auth != null;
+
+    // Meciuri + subcolecții (odds, factors)
+    match /matches/{matchId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+
+      match /{subcollection}/{docId} {
+        allow read: if isSignedIn();
+        allow write: if false;
+      }
     }
+
+    // Proprietarul sau cineva care îl urmărește
+    match /tickets/{ticketId} {
+      allow read: if isOwner(resource.data.uid)
+        || (isSignedIn()
+            && exists(/databases/$(database)/documents/follows/$(request.auth.uid)/following/$(resource.data.uid)));
+      allow write: if false;
+    }
+
+    match /transactions/{txId} {
+      allow read: if isOwner(resource.data.uid);
+      allow write: if false;
+    }
+
+    // Ligi: doar membrii
+    match /leagues/{leagueId} {
+      allow read: if isSignedIn() && request.auth.uid in resource.data.members;
+      allow write: if false;
+
+      // Cheia criptată: doar a ei, și doar dacă e membră
+      match /keys/{uid} {
+        allow read: if isOwner(uid) && isLeagueMember(leagueId);
+        allow write: if false;
+      }
+    }
+
+    // Documentul are câmpurile leagueId și uid (vezi docs/API.md)
+    match /league_stats/{docId} {
+      allow read: if isLeagueMember(resource.data.leagueId);
+      allow write: if false;
+    }
+
+    match /follows/{uid}/following/{otherUid} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    match /wheel_config/{doc} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    match /wheel_spins/{spinId} {
+      allow read: if isOwner(resource.data.uid);
+      allow write: if false;
+    }
+
+    match /cards/{cardId} {
+      allow read: if isOwner(resource.data.uid);
+      allow write: if false;
+    }
+
+    // Doar server
+    match /nfc_tokens/{document=**} {
+      allow read, write: if false;
+    }
+
+    // Doar admin, doar citire
+    match /pending_factors/{document=**} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

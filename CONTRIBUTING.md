@@ -30,6 +30,9 @@ JAVA_HOME=/opt/android-studio/jbr ./gradlew assembleDebug test
 # teste Python
 cd functions && python3 -m pytest -q tests
 
+# teste reguli Firestore (cer Java și Firebase CLI; prima dată: npm ci --prefix firestore-tests)
+firebase emulators:exec --only firestore --project demo-sporty-bara "npm --prefix firestore-tests test"
+
 # emulator Firebase (Auth, Firestore, Functions) — UI pe http://localhost:4000
 firebase emulators:start
 ```

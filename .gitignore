@@ -20,3 +20,4 @@ __pycache__/
 functions/venv/
 *-debug.log
 .firebase/
+node_modules/
