@@ -20,6 +20,7 @@ __pycache__/
 functions/venv/
 *-debug.log
 .firebase/
+node_modules/
 
 # Model: cache date + venv local
 functions/.data/
@@ -27,3 +28,6 @@ functions/.venv/
 
 # copii de lucru locale
 .claude/
+
+# Scout venv local
+functions/.venv/

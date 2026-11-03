@@ -36,3 +36,20 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt -r requirements-dev.txt
       - run: python -m pytest -q tests
+
+  rules:
+    name: Reguli Firestore (teste)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: firestore-tests/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - run: npm ci --prefix firestore-tests
+      - run: npx --yes firebase-tools@15.14.0 emulators:exec --only firestore --project demo-sporty-bara "npm --prefix firestore-tests test"

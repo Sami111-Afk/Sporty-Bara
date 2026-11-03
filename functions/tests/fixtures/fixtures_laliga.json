@@ -1,0 +1,38 @@
+{
+  "get": "fixtures",
+  "parameters": {"league": "140", "season": "2026"},
+  "errors": [],
+  "results": 5,
+  "response": [
+    {
+      "fixture": {"id": 1208021, "date": "2026-11-08T20:00:00+00:00", "status": {"short": "NS", "long": "Not Started"}},
+      "league": {"id": 140, "season": 2026},
+      "teams": {"home": {"name": "Barcelona"}, "away": {"name": "Sevilla"}},
+      "goals": {"home": null, "away": null}
+    },
+    {
+      "fixture": {"id": 1208022, "date": "2026-11-09T18:30:00+00:00", "status": {"short": "1H", "long": "First Half"}},
+      "league": {"id": 140, "season": 2026},
+      "teams": {"home": {"name": "Atletico Madrid"}, "away": {"name": "Real Betis"}},
+      "goals": {"home": 1, "away": 0}
+    },
+    {
+      "fixture": {"id": 1207990, "date": "2026-10-25T16:15:00+00:00", "status": {"short": "FT", "long": "Match Finished"}},
+      "league": {"id": 140, "season": 2026},
+      "teams": {"home": {"name": "Athletic Club"}, "away": {"name": "Celta Vigo"}},
+      "goals": {"home": 2, "away": 2}
+    },
+    {
+      "fixture": {"id": 1208030, "date": "2026-11-10T19:00:00+00:00", "status": {"short": "PST", "long": "Match Postponed"}},
+      "league": {"id": 140, "season": 2026},
+      "teams": {"home": {"name": "Girona"}, "away": {"name": "Getafe"}},
+      "goals": {"home": null, "away": null}
+    },
+    {
+      "fixture": {"id": 1208040, "date": "2026-11-15T14:00:00+00:00", "status": {"short": "CANC", "long": "Match Cancelled"}},
+      "league": {"id": 140, "season": 2026},
+      "teams": {"home": {"name": "Valencia"}, "away": {"name": "Mallorca"}},
+      "goals": {"home": null, "away": null}
+    }
+  ]
+}
