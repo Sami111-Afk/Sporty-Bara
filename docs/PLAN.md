@@ -39,6 +39,30 @@ Aplicație Android pentru urmărirea pariurilor sportive **fără bani reali**:
 Totul e **capybara-themed** (mascota Bara, Profesorul Bara, Bara Coins, ranguri capibara, ligi = „bălți”).
 Planul complet de design — culori, fonturi, componente, ecrane, asset-uri — e în **[DESIGN.md](DESIGN.md)** (îl întreține Erin).
 
+## Împărțirea muncii
+Fiecare face funcționalitățile lui **cap la coadă**: ecranul (Java + XML) + funcția de pe server (Python) + testele.
+
+**Erin**
+- Proiectul Firebase
+- Design (`DESIGN.md`, mascota Bara, tema)
+- Conturi: login, onboarding, profil, sold inițial, bonus zilnic
+- Bilete: plasare, modificare, ștergere, istoric, decontare
+- Roata de premii (UI + `spin_wheel` pe server)
+- Clasament general, bălți (ligi), follow
+- Card: design + Google Wallet (generare pass, sold)
+- Mod demo + manual de utilizare
+
+**Sami**
+- Legare app ↔ Firebase, reguli Firestore, emulator, CI
+- Cote: aducere cote + ecran Acasă + comparator
+- Cota proprie: model Poisson/Elo, backtest, Scout, testarea ipotezelor
+- Criptare Paillier în bălți
+- Consultant AI (Claude Haiku + chat Profesorul Bara)
+- Card: NFC (HCE, mod terminal, tokenuri)
+- Notificări, diagrame, documentația modelului
+
+**Legături între părți** (de stabilit în `docs/API.md`): biletele folosesc cotele; clasamentul din bălți folosește criptarea; cardul (Wallet) + NFC folosesc același ID de card.
+
 ## Etape
 
 ### 0. Fundație
@@ -175,7 +199,7 @@ La prezentare s-ar putea să nu fie meciuri live → avem nevoie de date control
   - [ ] De verificat cu `/v4/sports` (0 credite) dacă The Odds API acoperă Superliga; dacă nu → cote RO din API-Football
   - Superliga nu are xG în Understat → modelul RO merge pe goluri reale + Elo
 - [x] API AI: **Claude Haiku 5.5** (`claude-haiku-5-5`) — structured outputs pt. Scout, Batch API (-50%) pt. extragere; ~$5 credit acoperă proiectul; spend limit în Console
-- [ ] Împărțirea muncii (cine pe ce etapă)
+- [x] Împărțirea muncii (vezi secțiunea de mai sus)
 - [ ] Termene / data predării
 - [ ] Cine desenează mascota Bara / asset-urile
 - [ ] Limba aplicației: doar RO sau RO + EN
